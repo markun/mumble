@@ -861,7 +861,7 @@ ConnectDialog::ConnectDialog(QWidget *p, bool autoconnect) : QDialog(p), bAutoCo
 	qpbAdd->setHidden(g.s.disableConnectDialogEditing);
 	qpbEdit->setHidden(g.s.disableConnectDialogEditing);
 
-	qtwServers->setItemDelegate(new ServerViewDelegate());
+	qtwServers->setItemDelegate(&serverViewDelegate);
 
 	// Hide ping and user count if we are not allowed to ping.
 	if (!bAllowPing) {

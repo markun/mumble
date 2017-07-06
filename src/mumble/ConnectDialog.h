@@ -223,6 +223,7 @@ class ConnectDialog : public QDialog, public Ui::ConnectDialog {
 	private:
 		Q_OBJECT
 		Q_DISABLE_COPY(ConnectDialog)
+		ServerViewDelegate serverViewDelegate;
 	protected:
 		static QList<PublicInfo> qlPublicServers;
 		static QString qsUserCountry, qsUserCountryCode, qsUserContinentCode;
