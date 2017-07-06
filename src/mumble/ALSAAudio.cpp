@@ -22,6 +22,7 @@ class ALSAEnumerator {
 		QHash<QString,QString> qhOutput;
 		static QString getHint(void *hint, const char *id);
 		ALSAEnumerator();
+		~ALSAEnumerator();
 };
 
 static ALSAEnumerator *cards = NULL;
@@ -253,6 +254,12 @@ ALSAEnumerator::ALSAEnumerator() {
 		}
 		snd_card_next(&card);
 	}
+#endif
+}
+
+ALSAEnumerator::~ALSAEnumerator() {
+#if SND_LIB_VERSION >= 0x01000e
+	snd_config_update_free_global();
 #endif
 }
 
