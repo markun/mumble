@@ -378,7 +378,13 @@ Settings::KeyPair CertWizard::generateNewCert(QString qsname, const QString &qse
 
 	X509 *x509 = X509_new();
 	EVP_PKEY *pkey = EVP_PKEY_new();
-	RSA *rsa = RSA_generate_key(2048,RSA_F4,NULL,NULL);
+	RSA *rsa = NULL;
+	{
+		BIGNUM *exponent = BN_new();
+		BN_set_word(exponent, RSA_F4);
+		RSA_generate_key_ex(rsa, 2048, exponent, NULL);
+		BN_free(exponent);
+	}
 	EVP_PKEY_assign_RSA(pkey, rsa);
 
 	X509_set_version(x509, 2);
